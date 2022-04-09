@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  es-master-01:
+    container_name: es-master-01
+    build:
+      context: elasticsearch/docker/
+    ports:
+      - 9200:9200
+    volumes:
+      - ./elasticsearch/config/elasticsearch-master.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - data01:/usr/share/elasticsearch/data:z
+    environment:
+      discovery.seed_hosts: '[es-master-01, es-data-01]'
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    networks:
+      - elastic
+    deploy:
+      resources:
+        limits:
+          memory: 1GB
+
+  es-data-01:
+    container_name: es-data-01
+    build:
+      context: elasticsearch/docker/
+    volumes:
+      - ./elasticsearch/config/elasticsearch-data.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - data02:/usr/share/elasticsearch/data:z
+    environment:
+      discovery.seed_hosts: '[es-master-01, es-data-01]'
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    networks:
+      - elastic
+    deploy:
+      resources:
+        limits:
+          memory: 1GB
+
+networks:
+  elastic:
+    driver: bridge
+
+volumes:
+  data01:
+    driver: local
+  data02:
+    driver: local

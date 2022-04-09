@@ -1,0 +1,11 @@
+cluster.name: es-cluster
+node.name: node-data-01
+node.roles: ["data"]
+bootstrap.memory_lock: true
+
+network.host: 0.0.0.0
+discovery.seed_hosts:
+cluster.initial_master_nodes: ["node-master-01"]
+
+xpack.license.self_generated.type: trial
+xpack.security.enabled: false
