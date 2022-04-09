@@ -10,7 +10,7 @@ services:
       - ./elasticsearch/config/elasticsearch-master.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
       - data01:/usr/share/elasticsearch/data:z
     environment:
-      discovery.seed_hosts: '[es-master-01, es-data-01]'
+      ELASTICSEARCH__DISCOVERY__SEED_HOSTS: "es-master-01,es-data-01"
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
     networks:
       - elastic
@@ -27,7 +27,7 @@ services:
       - ./elasticsearch/config/elasticsearch-data.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
       - data02:/usr/share/elasticsearch/data:z
     environment:
-      discovery.seed_hosts: '[es-master-01, es-data-01]'
+      ELASTICSEARCH__DISCOVERY__SEED_HOSTS: "es-master-01,es-data-01"
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
     networks:
       - elastic

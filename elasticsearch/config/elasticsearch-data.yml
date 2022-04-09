@@ -4,7 +4,7 @@ node.roles: ["data"]
 bootstrap.memory_lock: true
 
 network.host: 0.0.0.0
-discovery.seed_hosts:
+discovery.seed_hosts: ${ELASTICSEARCH__DISCOVERY__SEED_HOSTS}
 cluster.initial_master_nodes: ["node-master-01"]
 
 xpack.license.self_generated.type: trial
