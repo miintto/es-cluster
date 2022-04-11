@@ -1,9 +1,9 @@
 cluster.name: es-cluster
 node.name: node-data-01
-node.roles: ["data"]
+node.roles: ["data", "ingest"]
 bootstrap.memory_lock: true
 
-network.host: 0.0.0.0
+network.host: _site_
 discovery.seed_hosts: ${ELASTICSEARCH__DISCOVERY__SEED_HOSTS}
 cluster.initial_master_nodes: ["node-master-01"]
 
