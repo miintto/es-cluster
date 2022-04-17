@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     DEBUG: bool = False
     SECRET_KEY: str
 
+    ELASTICSEARCH_HOST: str
+
     LOGGING_CONFIG = {
         'version': 1,
         'disable_existing_loggers': True,

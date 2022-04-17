@@ -13,6 +13,11 @@ class Http4XX(Enum):
     VALIDATE_ERROR = (
         "F001", "유효하지 않은 파라미터입니다.", status.HTTP_422_UNPROCESSABLE_ENTITY
     )
+    INVALID_DATE_RANGE = (
+        "F002",
+        "시작 날짜가 종료 날짜보다 큽니다.",
+        status.HTTP_422_UNPROCESSABLE_ENTITY,
+    )
 
 
 class Http5XX(Enum):
