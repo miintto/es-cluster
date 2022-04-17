@@ -7,7 +7,7 @@ from app.common.exceptions import APIException
 from app.common.response import APIResponse
 from app.common.response.codes import Http4XX, Http5XX
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("fastapi.request")
 
 
 async def request_validation_exception_handler(
