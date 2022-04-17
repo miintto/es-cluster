@@ -11,6 +11,25 @@ class DocumentSearchHandler():
 
     def __init__(self, host) -> None:
         self.client = EsClient(host=host)
+        self.minimum_should_match = 1
+
+    def get_should_list(self, keyword: str) -> List:
+        if not keyword:
+            self.minimum_should_match = 0
+            return []
+        self.minimum_should_match = 1
+        return [
+            {
+                "match": {
+                    "contents": keyword
+                }
+            },
+            {
+                "match": {
+                    "title": keyword
+                }
+            }
+        ]
 
     def get_filter_list(self, params: Dict) -> List:
         filters = [
@@ -54,7 +73,9 @@ class DocumentSearchHandler():
     def make_query(self, params: Dict) -> Dict:
         return {
             "bool": {
-                "filter": self.get_filter_list(params)
+                "should": self.get_should_list(params.get("keyword")),
+                "minimum_should_match": self.minimum_should_match,
+                "filter": self.get_filter_list(params),
             }
         }
 
